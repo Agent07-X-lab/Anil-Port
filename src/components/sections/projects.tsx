@@ -46,14 +46,13 @@ export function Projects() {
             <Dialog>
               <DialogTrigger asChild>
                 <div className="glass-card overflow-hidden h-full flex flex-col group cursor-pointer">
-                  <div className="relative overflow-hidden">
+                  <div className="relative overflow-hidden aspect-[3/2]">
                     <Image
                       src={project.image.imageUrl}
                       alt={project.title}
-                      width={600}
-                      height={400}
+                      fill
                       data-ai-hint={project.image.imageHint}
-                      className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                   </div>
