@@ -39,10 +39,10 @@ const Ballpit: React.FC<{
       for (let i = 0; i < count; i++) {
         balls.current.push({
           x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height - canvas.height,
-          vx: (Math.random() - 0.5) * 10,
-          vy: (Math.random() - 0.5) * 10,
-          radius: Math.random() * 5 + 3,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 2,
+          vy: (Math.random() - 0.5) * 2,
+          radius: Math.random() * 15 + 10,
           color: colors[Math.floor(Math.random() * colors.length)],
         });
       }
@@ -71,10 +71,10 @@ const Ballpit: React.FC<{
             const dx = ball.x - mouse.current.x;
             const dy = ball.y - mouse.current.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 100) {
+            if (dist < 150) {
                 const angle = Math.atan2(dy, dx);
-                ball.vx += Math.cos(angle) * 2;
-                ball.vy += Math.sin(angle) * 2;
+                ball.vx += Math.cos(angle) * 1.5;
+                ball.vy += Math.sin(angle) * 1.5;
             }
         }
         
@@ -91,22 +91,22 @@ const Ballpit: React.FC<{
           ball.vx *= -wallBounce;
           ball.x = ball.x - ball.radius < 0 ? ball.radius : canvas.width - ball.radius;
         }
-        if (ball.y + ball.radius > canvas.height) {
+        if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
           ball.vy *= -wallBounce;
-          ball.y = canvas.height - ball.radius;
+          ball.y = ball.y - ball.radius < 0 ? ball.radius : canvas.height - ball.radius;
         }
-        if (ball.y - ball.radius < 0) {
-            ball.vy *= -wallBounce;
-            ball.y = ball.radius;
-        }
+
 
         // Draw ball
         ctx.beginPath();
         ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
         ctx.fillStyle = ball.color;
+        ctx.globalAlpha = 0.7;
         ctx.fill();
         ctx.closePath();
       });
+      ctx.globalAlpha = 1;
+
 
       animationFrameId = requestAnimationFrame(animate);
     };
