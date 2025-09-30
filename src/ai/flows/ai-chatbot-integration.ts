@@ -35,7 +35,7 @@ const integrateAIChatbotPrompt = ai.definePrompt({
   - Name: Anil Kumar Sahu
   - Title: Full-Stack Developer & UI/UX Designer
   - Education: B.Tech Student at PME College
-  - Location: Chennai, Tamil Nadu, India
+  - Location: Odisha, Berhampur, India
   - Tagline: "Crafting Digital Experiences Through Code & Design"
 
   Skills:

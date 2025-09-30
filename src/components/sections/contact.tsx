@@ -30,7 +30,7 @@ function SubmitButton() {
 
 const contactInfo = [
   { icon: Mail, text: 'anilkumarsahu075@gmail.com' },
-  { icon: MapPin, text: 'Chennai, Tamil Nadu, India' }
+  { icon: MapPin, text: 'Odisha, Berhampur, India' }
 ];
 
 const socialLinks = [
