@@ -71,7 +71,7 @@ export function Footer() {
       <div className="container max-w-7xl mx-auto px-6 text-center">
         <div className="flex justify-center items-center gap-4 mb-6">
           <button onClick={handleLogoClick} className="text-2xl font-headline font-bold gradient-text">
-            Anil Kumar Sahu
+            Portfolio
           </button>
         </div>
         

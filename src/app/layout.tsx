@@ -7,13 +7,13 @@ import { Footer } from '@/components/footer';
 import { MouseSpotlight } from '@/components/ui/mouse-spotlight';
 
 export const metadata: Metadata = {
-  title: "Modern Codex - Anil Kumar Sahu's Portfolio",
+  title: "Modern Portfolio",
   description: "Anil Kumar Sahu - Full-Stack Developer & UI/UX Designer. Crafting Digital Experiences Through Code & Design.",
   openGraph: {
-    title: "Modern Codex - Anil Kumar Sahu's Portfolio",
+    title: "Modern Portfolio",
     description: "A stunning, modern portfolio showcasing the skills and projects of Anil Kumar Sahu, a Full-Stack Developer & UI/UX Designer.",
     url: 'https://your-domain.com', // To be updated with actual domain
-    siteName: 'Modern Codex',
+    siteName: 'Modern Portfolio',
     images: [
       {
         url: 'https://your-domain.com/og-image.png', // To be updated
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
    twitter: {
     card: 'summary_large_image',
-    title: "Modern Codex - Anil Kumar Sahu's Portfolio",
+    title: "Modern Portfolio",
     description: "A stunning, modern portfolio showcasing the skills and projects of Anil Kumar Sahu, a Full-Stack Developer & UI/UX Designer.",
     // creator: '@yourtwitterhandle', // To be updated
     images: ['https://your-domain.com/og-image.png'], // To be updated
