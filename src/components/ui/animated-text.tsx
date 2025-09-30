@@ -3,42 +3,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
-export function AnimatedTextGlitch({ text }: { text: string }) {
-  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const [displayText, setDisplayText] = useState(text.split('').map(() => ' ').join(''));
-  
-  useEffect(() => {
-    let interval: NodeJS.Timeout | null = null;
-    let iteration = 0;
-    
-    interval = setInterval(() => {
-      const newText = text
-        .split("")
-        .map((_, index) => {
-          if(index < iteration) {
-            return text[index];
-          }
-          return letters[Math.floor(Math.random() * 26)]
-        })
-        .join("");
-      setDisplayText(newText);
-      
-      if(iteration >= text.length){
-        if(interval) clearInterval(interval);
-      }
-      
-      iteration += 1 / 3;
-    }, 30);
-
-    return () => {
-      if (interval) clearInterval(interval);
-    };
-  }, [text]);
-
-  return <span className="font-mono">{displayText}</span>;
-}
-
-
 export function RotatingText({ roles }: { roles: string[] }) {
   const [index, setIndex] = useState(0);
 
