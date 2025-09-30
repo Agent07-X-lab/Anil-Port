@@ -5,9 +5,16 @@ import * as THREE from 'three';
 
 export function ParticleBackground() {
     const mountRef = useRef<HTMLDivElement>(null);
+    const mouse = useRef({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
 
     useEffect(() => {
         if (!mountRef.current) return;
+
+        const handleMouseMove = (event: MouseEvent) => {
+            mouse.current.x = event.clientX;
+            mouse.current.y = event.clientY;
+        };
+        window.addEventListener('mousemove', handleMouseMove);
 
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -81,7 +88,7 @@ export function ParticleBackground() {
                 // speed is higher for particles closer to the center
                 const angularSpeed = 0.5 / (radius * 0.1 + 1); 
                 angle += angularSpeed * delta;
-                
+
                 // pull particles to the center
                 radius -= 2 * delta;
 
@@ -90,6 +97,26 @@ export function ParticleBackground() {
                     radius = Math.random() * 150 + 50;
                     angle = Math.random() * Math.PI * 2;
                 }
+                
+                let x = radius * Math.cos(angle);
+                let y = radius * Math.sin(angle);
+
+                // Mouse interaction
+                const mouseVector = new THREE.Vector2(
+                    (mouse.current.x / window.innerWidth) * 2 - 1,
+                    -(mouse.current.y / window.innerHeight) * 2 + 1
+                );
+                
+                const particleVector = new THREE.Vector2(x / 100, y / 100);
+                const distance = mouseVector.distanceTo(particleVector);
+
+                if (distance < 0.2) {
+                    const repelForce = (0.2 - distance) * 2;
+                    const repelAngle = Math.atan2(y, x) - Math.atan2(mouseVector.y * 100, mouseVector.x * 100);
+                    angle += Math.cos(repelAngle) * repelForce * 0.1;
+                    radius += Math.sin(repelAngle) * repelForce * 10;
+                }
+
 
                 positionAttribute.setX(i, radius * Math.cos(angle));
                 positionAttribute.setY(i, radius * Math.sin(angle));
@@ -108,7 +135,10 @@ export function ParticleBackground() {
 
         return () => {
             window.removeEventListener('resize', onResize);
-            mountRef.current?.removeChild(renderer.domElement);
+            window.removeEventListener('mousemove', handleMouseMove);
+            if (mountRef.current && renderer.domElement) {
+                mountRef.current.removeChild(renderer.domElement);
+            }
             renderer.dispose();
         };
     }, []);
