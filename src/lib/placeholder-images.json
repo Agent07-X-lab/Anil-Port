@@ -1,3 +1,46 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "profile",
+      "description": "Profile picture of Anil Kumar Sahu",
+      "imageUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxtYW4lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NTkxNzE5NzV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "man portrait"
+    },
+    {
+      "id": "project-chatbot",
+      "description": "Screenshot of AI-Powered Chatbot project",
+      "imageUrl": "https://images.unsplash.com/photo-1582030934801-75a74b6071dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8YWklMjBjaGF0Ym90fGVufDB8fHx8MTc1OTE2NjE1Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "ai chatbot"
+    },
+    {
+      "id": "project-task-manager",
+      "description": "Screenshot of Advanced Task Management System project",
+      "imageUrl": "https://images.unsplash.com/photo-1659018966825-43297e655ccf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxkYXNoYm9hcmQlMjBpbnRlcmZhY2V8ZW58MHx8fHwxNzU5MTg3MTg2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "dashboard interface"
+    },
+    {
+      "id": "project-todo",
+      "description": "Screenshot of Smart To-Do List Application project",
+      "imageUrl": "https://images.unsplash.com/photo-1644329843283-640d00509d43?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx0by1kbyUyMGxpc3R8ZW58MHx8fHwxNzU5MjEwMjEzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "to-do list"
+    },
+    {
+      "id": "project-db-dashboard",
+      "description": "Screenshot of SQL Database Dashboard project",
+      "imageUrl": "https://images.unsplash.com/photo-1745847768367-893e989d3a98?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxkYXRhJTIwY2hhcnRzfGVufDB8fHx8MTc1OTIxNTQxMXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "data charts"
+    },
+    {
+      "id": "project-ecommerce",
+      "description": "Screenshot of E-Commerce Platform project",
+      "imageUrl": "https://images.unsplash.com/photo-1586880244406-556ebe35f282?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxvbmxpbmUlMjBzdG9yZXxlbnwwfHx8fDE3NTkxMTEzNTB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "online store"
+    },
+    {
+      "id": "project-weather",
+      "description": "Screenshot of Weather Forecast App project",
+      "imageUrl": "https://images.unsplash.com/photo-1737912133578-159cdde20086?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx3ZWF0aGVyJTIwbWFwfGVufDB8fHx8MTc1OTIxNTQxMXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "weather map"
+    }
+  ]
 }
