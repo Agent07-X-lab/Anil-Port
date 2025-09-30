@@ -1,7 +1,7 @@
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
-import { useEffect } from 'react';
+import { useActionState, useEffect } from 'react';
+import { useFormStatus } from 'react-dom';
 import { motion } from 'framer-motion';
 import { Section } from '@/components/ui/section';
 import { Input } from '@/components/ui/input';
@@ -42,7 +42,7 @@ const socialLinks = [
 export function Contact() {
   const { toast } = useToast();
   const initialState: ContactFormState = { message: '', success: false };
-  const [state, formAction] = useFormState(submitContactForm, initialState);
+  const [state, formAction] = useActionState(submitContactForm, initialState);
 
   useEffect(() => {
     if (state.message) {
