@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Section } from '@/components/ui/section';
 import { Button } from '../ui/button';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const stats = [
     { value: '15+', label: 'Projects', color: 'text-primary' },
@@ -27,6 +28,8 @@ const itemVariants = {
 };
 
 export function About() {
+  const profileImage = PlaceHolderImages.find(p => p.id === 'profile');
+
   return (
     <Section id="about" title="About Me" className="relative overflow-hidden">
         <motion.div 
@@ -40,7 +43,7 @@ export function About() {
                 <div className="relative">
                     <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-full blur-2xl opacity-50 animate-pulse"></div>
                         <Image 
-                            src="https://storage.googleapis.com/project-spark-3c35f.appspot.com/b5c731c0-0387-4340-97f3-1c61d51c72ea.jpg"
+                            src={profileImage?.imageUrl || "https://storage.googleapis.com/project-spark-3c35f.appspot.com/b5c731c0-0387-4340-97f3-1c61d51c72ea.jpg"}
                             alt="Anil Kumar Sahu"
                             width={320}
                             height={320}
