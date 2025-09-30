@@ -136,7 +136,7 @@ const Shuffle: React.FC<ShuffleProps> = ({
           data-original={char}
           aria-hidden="true"
         >
-          {char === ' ' ? '\u00A0' : (reducedMotion ? char : (shuffleDirection === 'left' ? SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)] : char))}
+          {char === ' ' ? '\u00A0' : char}
         </span>
       ))}
     </div>
