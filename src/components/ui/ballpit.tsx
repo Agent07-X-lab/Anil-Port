@@ -32,6 +32,7 @@ const Ballpit: React.FC<{
     let animationFrameId: number;
 
     const resizeCanvas = () => {
+      if(!canvas.parentElement) return;
       canvas.width = canvas.parentElement!.clientWidth;
       canvas.height = canvas.parentElement!.clientHeight;
     };
@@ -45,7 +46,7 @@ const Ballpit: React.FC<{
           vx: (Math.random() - 0.5) * 2,
           vy: (Math.random() - 0.5) * 2,
           radius: Math.random() * (maxRadius - minRadius) + minRadius,
-          color: `hsl(${Math.random() * 360}, 100%, 75%)`,
+          color: `hsl(${Math.random() * 360}, 70%, 60%)`,
         });
       }
     }
@@ -62,6 +63,7 @@ const Ballpit: React.FC<{
     }
     
     const animate = () => {
+      if (!ctx || !canvas) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       balls.current.forEach(ball => {
@@ -99,21 +101,13 @@ const Ballpit: React.FC<{
         }
 
 
-        // Draw ball with glow
+        // Draw ball
         ctx.beginPath();
         ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-        
-        ctx.shadowColor = ball.color;
-        ctx.shadowBlur = 25;
-        
         ctx.fillStyle = ball.color;
         ctx.fill();
         ctx.closePath();
-        
-        // Reset shadow for the next element
-        ctx.shadowBlur = 0;
       });
-      ctx.globalAlpha = 1;
 
 
       animationFrameId = requestAnimationFrame(animate);
