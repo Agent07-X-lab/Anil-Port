@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState, useEffect } from 'react';
+import { useActionState, useEffect, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { motion } from 'framer-motion';
 import { Section } from '@/components/ui/section';
@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Loader2, Rocket, Mail, MapPin, Github, Linkedin, Twitter } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { submitContactForm, type ContactFormState } from '@/app/actions';
+import Stepper, { Step } from '../ui/stepper';
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -30,7 +31,7 @@ function SubmitButton() {
 
 const contactInfo = [
   { icon: Mail, text: 'anilkumarsahu075@gmail.com' },
-  { icon: MapPin, text: 'Odisha, Berhampur, India' }
+  { icon: MapPin, text: 'Berhampur, Odisha, India' }
 ];
 
 const socialLinks = [
@@ -43,6 +44,7 @@ export function Contact() {
   const { toast } = useToast();
   const initialState: ContactFormState = { message: '', success: false };
   const [state, formAction] = useActionState(submitContactForm, initialState);
+  const [name, setName] = useState('');
 
   useEffect(() => {
     if (state.message) {
@@ -62,23 +64,40 @@ export function Contact() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.8 }}
-          className="glass-card p-8"
         >
-          <form action={formAction} className="space-y-6">
-            <div className="space-y-2">
-              <Input name="name" placeholder="Name" required className="bg-background/50 h-12"/>
-            </div>
-            <div className="space-y-2">
-              <Input name="email" type="email" placeholder="Email" required className="bg-background/50 h-12"/>
-            </div>
-            <div className="space-y-2">
-              <Input name="subject" placeholder="Subject" required className="bg-background/50 h-12"/>
-            </div>
-            <div className="space-y-2">
-              <Textarea name="message" placeholder="Message" required className="bg-background/50" rows={5}/>
-            </div>
-            <SubmitButton />
-          </form>
+           <form action={formAction} className="space-y-6">
+          <Stepper
+            initialStep={1}
+            onStepChange={(step) => {
+              console.log(step);
+            }}
+            onFinalStepCompleted={() => console.log("All steps completed!")}
+            backButtonText="Previous"
+            nextButtonText="Next"
+          >
+            <Step>
+              <div className="space-y-2">
+                <Input name="name" placeholder="Name" required className="bg-background/50 h-12"/>
+              </div>
+            </Step>
+            <Step>
+              <div className="space-y-2">
+                <Input name="email" type="email" placeholder="Email" required className="bg-background/50 h-12"/>
+              </div>
+            </Step>
+            <Step>
+              <div className="space-y-2">
+                <Input name="subject" placeholder="Subject" required className="bg-background/50 h-12"/>
+              </div>
+            </Step>
+            <Step>
+              <div className="space-y-2">
+                <Textarea name="message" placeholder="Message" required className="bg-background/50" rows={5}/>
+              </div>
+              <SubmitButton />
+            </Step>
+          </Stepper>
+        </form>
         </motion.div>
         
         <motion.div
