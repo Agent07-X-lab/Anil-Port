@@ -29,12 +29,12 @@ function SubmitButton() {
 }
 
 const contactInfo = [
-  { icon: Mail, text: 'anil.sahu@example.com' },
+  { icon: Mail, text: 'anilkumarsahu075@gmail.com' },
   { icon: MapPin, text: 'Chennai, Tamil Nadu, India' }
 ];
 
 const socialLinks = [
-  { icon: Github, href: '#', name: 'GitHub' },
+  { icon: Github, href: 'https://github.com/Anil-glith', name: 'GitHub' },
   { icon: Linkedin, href: 'https://www.linkedin.com/in/anil-sahu-476001361?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app', name: 'LinkedIn' },
   { icon: Twitter, href: '#', name: 'Twitter' },
 ];

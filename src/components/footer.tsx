@@ -7,11 +7,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Separator } from './ui/separator';
 
 const socialLinks = [
-  { icon: Github, href: 'https://github.com', 'aria-label': 'GitHub' },
+  { icon: Github, href: 'https://github.com/Anil-glith', 'aria-label': 'GitHub' },
   { icon: Linkedin, href: 'https://www.linkedin.com/in/anil-sahu-476001361?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app', 'aria-label': 'LinkedIn' },
   { icon: Twitter, href: 'https://twitter.com', 'aria-label': 'Twitter' },
   { icon: Instagram, href: 'https://instagram.com', 'aria-label': 'Instagram' },
-  { icon: Mail, href: 'mailto:your.email@example.com', 'aria-label': 'Email' },
+  { icon: Mail, href: 'mailto:anilkumarsahu075@gmail.com', 'aria-label': 'Email' },
 ];
 
 const navLinks = [
