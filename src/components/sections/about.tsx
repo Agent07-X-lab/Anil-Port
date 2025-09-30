@@ -33,8 +33,8 @@ const itemVariants = {
 export function About() {
   return (
     <Section id="about" title="About Me" className="relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20 pointer-events-none">
-            <Ballpit count={50} gravity={0} friction={0.98} wallBounce={0.9} followCursor={true}/>
+        <div className="absolute inset-0 opacity-30 pointer-events-none">
+            <Ballpit count={200} gravity={0} friction={0.98} wallBounce={0.9} followCursor={true}/>
         </div>
         <motion.div 
             className="relative z-10 grid md:grid-cols-2 gap-12"

@@ -33,8 +33,6 @@ const Ballpit: React.FC<{
     };
     resizeCanvas();
 
-    const colors = ['#3399ff', '#29d99d', '#f94c4c', '#fafafa'];
-
     if (balls.current.length === 0) {
       for (let i = 0; i < count; i++) {
         balls.current.push({
@@ -43,7 +41,7 @@ const Ballpit: React.FC<{
           vx: (Math.random() - 0.5) * 2,
           vy: (Math.random() - 0.5) * 2,
           radius: Math.random() * 15 + 10,
-          color: colors[Math.floor(Math.random() * colors.length)],
+          color: `hsl(${Math.random() * 360}, 70%, 60%)`,
         });
       }
     }
