@@ -22,6 +22,11 @@ const IntegrateAIChatbotOutputSchema = z.object({
 export type IntegrateAIChatbotOutput = z.infer<typeof IntegrateAIChatbotOutputSchema>;
 
 export async function integrateAIChatbot(input: IntegrateAIChatbotInput): Promise<IntegrateAIChatbotOutput> {
+   if (!process.env.GEMINI_API_KEY && !process.env.GOOGLE_API_KEY) {
+    return {
+      response: "The AI chatbot is not configured. Please set the GEMINI_API_KEY environment variable."
+    };
+  }
   return integrateAIChatbotFlow(input);
 }
 
