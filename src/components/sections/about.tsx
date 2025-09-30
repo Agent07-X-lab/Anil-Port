@@ -3,11 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Section } from '@/components/ui/section';
-import Ballpit from '@/components/ui/ballpit';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Button } from '../ui/button';
-
-const profileImage = PlaceHolderImages.find(p => p.id === 'profile');
 
 const stats = [
     { value: '15+', label: 'Projects', color: 'text-primary' },
@@ -33,9 +29,6 @@ const itemVariants = {
 export function About() {
   return (
     <Section id="about" title="About Me" className="relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30 pointer-events-none">
-            <Ballpit count={50} gravity={0} friction={0.98} wallBounce={0.9} followCursor={true} minRadius={30} maxRadius={50}/>
-        </div>
         <motion.div 
             className="relative z-10 grid md:grid-cols-2 gap-12"
             variants={containerVariants}
@@ -46,16 +39,13 @@ export function About() {
             <motion.div className="flex items-center justify-center" variants={itemVariants}>
                 <div className="relative">
                     <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-full blur-2xl opacity-50 animate-pulse"></div>
-                    {profileImage && (
                         <Image 
-                            src={profileImage.imageUrl}
+                            src="https://storage.googleapis.com/project-spark-3c35f.appspot.com/b5c731c0-0387-4340-97f3-1c61d51c72ea.jpg"
                             alt="Anil Kumar Sahu"
                             width={320}
                             height={320}
-                            data-ai-hint={profileImage.imageHint}
                             className="relative w-80 h-80 rounded-full object-cover border-4 border-primary shadow-2xl"
                         />
-                    )}
                 </div>
             </motion.div>
             
