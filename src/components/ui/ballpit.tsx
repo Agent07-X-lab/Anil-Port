@@ -33,7 +33,7 @@ const Ballpit: React.FC<{
     };
     resizeCanvas();
 
-    const colors = ['#00f5ff', '#a855f7', '#ff006e', '#ffffff'];
+    const colors = ['#3399ff', '#29d99d', '#f94c4c', '#fafafa'];
 
     if (balls.current.length === 0) {
       for (let i = 0; i < count; i++) {
@@ -101,7 +101,7 @@ const Ballpit: React.FC<{
         ctx.beginPath();
         ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
         ctx.fillStyle = ball.color;
-        ctx.globalAlpha = 0.7;
+        ctx.globalAlpha = 1;
         ctx.fill();
         ctx.closePath();
       });
