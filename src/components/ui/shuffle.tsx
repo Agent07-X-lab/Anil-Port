@@ -64,6 +64,7 @@ const Shuffle: React.FC<ShuffleProps> = ({
 
     chars.forEach((char, index) => {
       const originalChar = char.getAttribute('data-original');
+      if (originalChar === ' ') return;
       let fromText = '',
         toText = '';
 
@@ -135,7 +136,7 @@ const Shuffle: React.FC<ShuffleProps> = ({
           data-original={char}
           aria-hidden="true"
         >
-          {reducedMotion ? char : (shuffleDirection === 'left' ? SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)] : char)}
+          {char === ' ' ? '\u00A0' : (reducedMotion ? char : (shuffleDirection === 'left' ? SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)] : char))}
         </span>
       ))}
     </div>
