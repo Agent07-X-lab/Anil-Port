@@ -8,12 +8,16 @@ const Ballpit: React.FC<{
   friction?: number;
   wallBounce?: number;
   followCursor?: boolean;
+  minRadius?: number;
+  maxRadius?: number;
 }> = ({
-  count = 200,
-  gravity = 0.7,
-  friction = 0.8,
-  wallBounce = 0.95,
+  count = 50,
+  gravity = 0,
+  friction = 0.98,
+  wallBounce = 0.9,
   followCursor = true,
+  minRadius = 20,
+  maxRadius = 35
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const balls = useRef<any[]>([]);
@@ -40,8 +44,8 @@ const Ballpit: React.FC<{
           y: Math.random() * canvas.height,
           vx: (Math.random() - 0.5) * 2,
           vy: (Math.random() - 0.5) * 2,
-          radius: Math.random() * 15 + 10,
-          color: `hsl(${Math.random() * 360}, 70%, 60%)`,
+          radius: Math.random() * (maxRadius - minRadius) + minRadius,
+          color: `hsl(${Math.random() * 360}, 100%, 75%)`,
         });
       }
     }
@@ -95,13 +99,19 @@ const Ballpit: React.FC<{
         }
 
 
-        // Draw ball
+        // Draw ball with glow
         ctx.beginPath();
         ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+        
+        ctx.shadowColor = ball.color;
+        ctx.shadowBlur = 25;
+        
         ctx.fillStyle = ball.color;
-        ctx.globalAlpha = 1;
         ctx.fill();
         ctx.closePath();
+        
+        // Reset shadow for the next element
+        ctx.shadowBlur = 0;
       });
       ctx.globalAlpha = 1;
 
@@ -120,7 +130,7 @@ const Ballpit: React.FC<{
         window.removeEventListener('mousemove', handleMouseMove);
       }
     };
-  }, [count, gravity, friction, wallBounce, followCursor]);
+  }, [count, gravity, friction, wallBounce, followCursor, minRadius, maxRadius]);
 
   return <canvas ref={canvasRef} />;
 };
