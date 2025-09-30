@@ -24,14 +24,14 @@ export function Hero() {
          <Shuffle
             text="Anil Kumar Sahu"
             shuffleDirection="right"
-            duration={1}
-            animationMode="onebyone"
-            shuffleTimes={3}
+            duration={0.35}
+            animationMode="evenodd"
+            shuffleTimes={1}
             ease="power3.out"
-            stagger={0.05}
+            stagger={0.03}
             threshold={0.1}
             triggerOnce={true}
-            triggerOnHover={false}
+            triggerOnHover={true}
             respectReducedMotion={true}
             className="gradient-text"
           />
