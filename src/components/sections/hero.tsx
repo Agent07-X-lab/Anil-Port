@@ -15,6 +15,14 @@ export function Hero() {
     <section id="home" className="relative h-screen w-screen flex flex-col items-center justify-center text-center overflow-hidden">
       <ParticleBackground />
       <div className="relative z-10 flex flex-col items-center">
+        <motion.p
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="text-xl md:text-2xl font-light text-muted-foreground mb-2"
+        >
+          Hi there 👋, I'm
+        </motion.p>
         <motion.h1
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
