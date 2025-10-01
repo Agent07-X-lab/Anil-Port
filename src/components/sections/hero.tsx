@@ -32,11 +32,11 @@ export function Hero() {
          <Shuffle
             text="Anil Kumar Sahu"
             shuffleDirection="right"
-            duration={0.8}
-            animationMode="onebyone"
-            shuffleTimes={1}
-            ease="power3.out"
-            stagger={0.05}
+            duration={1.5}
+            animationMode="all"
+            shuffleTimes={5}
+            ease="power3.inOut"
+            stagger={0.1}
             threshold={0.1}
             triggerOnce={true}
             triggerOnHover={false}
