@@ -110,10 +110,6 @@ export function ParticleBackground() {
             requestAnimationFrame(animate);
             const elapsedTime = clock.getElapsedTime();
 
-            if (points) {
-                points.rotation.y = elapsedTime * 0.1;
-            }
-
             // Animate camera to follow mouse
             camera.position.x += (mouse.current.x * 0.5 - camera.position.x) * 0.05;
             camera.position.y += (mouse.current.y * 0.5 - camera.position.y) * 0.05;
