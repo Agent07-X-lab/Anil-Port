@@ -86,13 +86,13 @@
     @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
   }
   .neon-glow-primary {
-    box-shadow: 0 0 5px theme('colors.primary'), 0 0 10px theme('colors.primary / 0.7'), 0 0 20px theme('colors.primary / 0.5'), 0 0 40px theme('colors.primary / 0.3');
+    box-shadow: 0 0 5px hsl(var(--primary)), 0 0 10px hsl(var(--primary) / 0.7), 0 0 20px hsl(var(--primary) / 0.5), 0 0 40px hsl(var(--primary) / 0.3);
   }
   .neon-glow-secondary {
-    box-shadow: 0 0 5px theme('colors.secondary'), 0 0 10px theme('colors.secondary / 0.7'), 0 0 20px theme('colors.secondary / 0.5'), 0 0 40px theme('colors.secondary / 0.3');
+    box-shadow: 0 0 5px hsl(var(--secondary)), 0 0 10px hsl(var(--secondary) / 0.7), 0 0 20px hsl(var(--secondary) / 0.5), 0 0 40px hsl(var(--secondary) / 0.3);
   }
   .neon-glow-destructive {
-     box-shadow: 0 0 5px theme('colors.destructive.DEFAULT'), 0 0 10px theme('colors.destructive.DEFAULT / 0.7'), 0 0 20px theme('colors.destructive.DEFAULT / 0.5'), 0 0 40px theme('colors.destructive.DEFAULT / 0.3');
+     box-shadow: 0 0 5px hsl(var(--destructive)), 0 0 10px hsl(var(--destructive) / 0.7), 0 0 20px hsl(var(--destructive) / 0.5), 0 0 40px hsl(var(--destructive) / 0.3);
   }
 
   .animated-gradient-overlay {
