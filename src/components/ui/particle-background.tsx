@@ -25,11 +25,11 @@ export function ParticleBackground() {
         renderer.setPixelRatio(window.devicePixelRatio);
         mountRef.current.appendChild(renderer.domElement);
 
+        // Small white stars
         const starCount = 5000;
         const positions = new Float32Array(starCount * 3);
         const starVelocities = new Float32Array(starCount);
-
-        const geometry = new THREE.BufferGeometry();
+        const starGeometry = new THREE.BufferGeometry();
 
         for (let i = 0; i < starCount; i++) {
             const i3 = i * 3;
@@ -38,19 +38,51 @@ export function ParticleBackground() {
             positions[i3 + 2] = (Math.random() - 0.5) * 10;
             starVelocities[i] = 0.005 + Math.random() * 0.015;
         }
-
-        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        starGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
         
-        const material = new THREE.PointsMaterial({
+        const starMaterial = new THREE.PointsMaterial({
             color: '#ffffff',
             size: 0.01,
             sizeAttenuation: true,
             depthWrite: false,
             blending: THREE.AdditiveBlending,
         });
-
-        const stars = new THREE.Points(geometry, material);
+        const stars = new THREE.Points(starGeometry, starMaterial);
         scene.add(stars);
+
+        // Big colorful stars
+        const bigStarCount = 100;
+        const bigPositions = new Float32Array(bigStarCount * 3);
+        const bigColors = new Float32Array(bigStarCount * 3);
+        const bigStarVelocities = new Float32Array(bigStarCount);
+        const bigStarGeometry = new THREE.BufferGeometry();
+        const colors = [new THREE.Color('#ff8a5b'), new THREE.Color('#86a8e7'), new THREE.Color('#91EAE4'), new THREE.Color('#7f7fd5')];
+
+        for (let i = 0; i < bigStarCount; i++) {
+            const i3 = i * 3;
+            bigPositions[i3] = (Math.random() - 0.5) * 12;
+            bigPositions[i3 + 1] = (Math.random() - 0.5) * 12;
+            bigPositions[i3 + 2] = (Math.random() - 0.5) * 10;
+            bigStarVelocities[i] = 0.002 + Math.random() * 0.008;
+
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            bigColors[i3] = color.r;
+            bigColors[i3 + 1] = color.g;
+            bigColors[i3 + 2] = color.b;
+        }
+        bigStarGeometry.setAttribute('position', new THREE.BufferAttribute(bigPositions, 3));
+        bigStarGeometry.setAttribute('color', new THREE.BufferAttribute(bigColors, 3));
+
+        const bigStarMaterial = new THREE.PointsMaterial({
+            size: 0.08,
+            vertexColors: true,
+            sizeAttenuation: true,
+            depthWrite: false,
+            blending: THREE.AdditiveBlending,
+        });
+        const bigStars = new THREE.Points(bigStarGeometry, bigStarMaterial);
+        scene.add(bigStars);
+
 
         const onResize = () => {
             camera.aspect = window.innerWidth / window.innerHeight;
@@ -65,19 +97,28 @@ export function ParticleBackground() {
             requestAnimationFrame(animate);
             const elapsedTime = clock.getElapsedTime();
 
+            // Animate small stars
             const positions = stars.geometry.attributes.position.array as Float32Array;
-
             for (let i = 0; i < starCount; i++) {
                 const i3 = i * 3;
                 positions[i3 + 2] += starVelocities[i];
-
                 if (positions[i3 + 2] > 5) {
                     positions[i3 + 2] = -5;
                 }
             }
-
             stars.geometry.attributes.position.needsUpdate = true;
             
+            // Animate big stars
+            const bigPositions = bigStars.geometry.attributes.position.array as Float32Array;
+            for (let i = 0; i < bigStarCount; i++) {
+                const i3 = i * 3;
+                bigPositions[i3 + 2] += bigStarVelocities[i];
+                if (bigPositions[i3 + 2] > 5) {
+                    bigPositions[i3 + 2] = -5;
+                }
+            }
+            bigStars.geometry.attributes.position.needsUpdate = true;
+
             // Animate camera to follow mouse
             camera.position.x += (mouse.current.x * 0.1 - camera.position.x) * 0.02;
             camera.position.y += (mouse.current.y * 0.1 - camera.position.y) * 0.02;
@@ -93,8 +134,10 @@ export function ParticleBackground() {
             if (mountRef.current && renderer.domElement) {
                 mountRef.current.removeChild(renderer.domElement);
             }
-            geometry?.dispose();
-            material?.dispose();
+            starGeometry?.dispose();
+            starMaterial?.dispose();
+            bigStarGeometry?.dispose();
+            bigStarMaterial?.dispose();
             renderer.dispose();
         };
     }, []);
