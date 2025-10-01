@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Section } from '@/components/ui/section';
 import { Button } from '../ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import Ballpit from '../ui/ballpit';
 
 const stats = [
     { value: '15+', label: 'Projects', color: 'text-primary' },
@@ -32,6 +33,9 @@ export function About() {
 
   return (
     <Section id="about" title="About Me" className="relative overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <Ballpit />
+        </div>
         <motion.div 
             className="relative z-10 grid md:grid-cols-2 gap-12"
             variants={containerVariants}
