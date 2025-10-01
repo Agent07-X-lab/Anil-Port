@@ -31,12 +31,12 @@ export function Hero() {
         >
          <Shuffle
             text="Anil Kumar Sahu"
-            shuffleDirection="right"
-            duration={1.5}
-            animationMode="all"
-            shuffleTimes={5}
-            ease="power3.inOut"
-            stagger={0.1}
+            shuffleDirection="left"
+            duration={1}
+            animationMode="onebyone"
+            shuffleTimes={3}
+            ease="power3.out"
+            stagger={0.05}
             threshold={0.1}
             triggerOnce={true}
             triggerOnHover={false}
