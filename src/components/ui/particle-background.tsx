@@ -8,6 +8,9 @@ export function ParticleBackground() {
     const mouse = useRef({ x: 0, y: 0 });
 
     useEffect(() => {
+        const start = performance.now();
+        console.log('ParticleBackground: Starting setup');
+
         if (!mountRef.current) return;
 
         const handleMouseMove = (event: MouseEvent) => {
@@ -26,7 +29,7 @@ export function ParticleBackground() {
         mountRef.current.appendChild(renderer.domElement);
 
         // Small white stars
-        const starCount = 5000;
+        const starCount = 1000;
         const positions = new Float32Array(starCount * 3);
         const starVelocities = new Float32Array(starCount);
         const starGeometry = new THREE.BufferGeometry();
@@ -51,7 +54,7 @@ export function ParticleBackground() {
         scene.add(stars);
 
         // Big colorful stars
-        const bigStarCount = 100;
+        const bigStarCount = 20;
         const bigPositions = new Float32Array(bigStarCount * 3);
         const bigColors = new Float32Array(bigStarCount * 3);
         const bigStarVelocities = new Float32Array(bigStarCount);

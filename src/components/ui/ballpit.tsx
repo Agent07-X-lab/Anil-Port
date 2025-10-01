@@ -11,7 +11,7 @@ const Ballpit: React.FC<{
   minRadius?: number;
   maxRadius?: number;
 }> = ({
-  count = 50,
+  count = 10,
   gravity = 0,
   friction = 0.98,
   wallBounce = 0.9,
@@ -24,6 +24,9 @@ const Ballpit: React.FC<{
   const mouse = useRef({ x: -1000, y: -1000 });
 
   useEffect(() => {
+    const start = performance.now();
+    console.log('Ballpit: Starting setup');
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -115,8 +118,10 @@ const Ballpit: React.FC<{
 
     animate();
 
+    console.log('Ballpit setup time:', performance.now() - start);
+
     window.addEventListener('resize', resizeCanvas);
-    
+
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', resizeCanvas);

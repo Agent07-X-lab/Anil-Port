@@ -67,15 +67,15 @@
 ## 🚀 Quick Start
 
 ### **Prerequisites**
-- Node.js (v16 or higher)
+- Node.js (v18 or higher)
 - npm or yarn
 
 ### **Installation**
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/anilkumarsahu/portfolio.git
-cd portfolio
+git clone https://github.com/Anil-glith/Anil-Port.git
+cd Anil-Port
 ```
 
 2. **Install dependencies**
@@ -83,19 +83,14 @@ cd portfolio
 npm install
 ```
 
-3. **Install required packages**
+3. **Start the development server**
 ```bash
-npm install three lucide-react
+npm run dev
 ```
 
-4. **Start the development server**
-```bash
-npm start
+4. **Open your browser**
 ```
-
-5. **Open your browser**
-```
-http://localhost:3000
+http://localhost:9002
 ```
 
 ---
@@ -103,30 +98,55 @@ http://localhost:3000
 ## 📂 Project Structure
 
 ```
-portfolio/
-├── public/
-│   ├── index.html
-│   └── favicon.ico
-├── src/
-│   ├── components/
-│   │   ├── Navbar.jsx
-│   │   ├── Hero.jsx
-│   │   ├── About.jsx
-│   │   ├── Skills.jsx
-│   │   ├── Projects.jsx
-│   │   ├── Experience.jsx
-│   │   ├── Contact.jsx
-│   │   ├── Footer.jsx
-│   │   └── Ballpit.jsx      # Three.js interactive component
-│   ├── assets/
-│   │   ├── images/
-│   │   └── icons/
-│   ├── App.jsx               # Main application component
-│   ├── index.js
-│   └── index.css
+Anil-Port/
+├── .gitignore
+├── .modified
+├── apphosting.yaml
+├── components.json
+├── next.config.ts
 ├── package.json
+├── package-lock.json
+├── postcss.config.mjs
 ├── README.md
-└── .gitignore
+├── tailwind.config.ts
+├── tsconfig.json
+├── .idx/
+├── docs/
+│   └── blueprint.md
+└── src/
+    ├── ai/
+    │   ├── dev.ts
+    │   ├── genkit.ts
+    │   └── flows/
+    │       └── ai-chatbot-integration.ts
+    ├── app/
+    │   ├── actions.ts
+    │   ├── favicon.ico
+    │   ├── globals.css
+    │   ├── layout.tsx
+    │   ├── page.tsx
+    │   └── stepper.css
+    ├── components/
+    │   ├── chatbot.tsx
+    │   ├── footer.tsx
+    │   ├── header.tsx
+    │   ├── sections/
+    │   │   ├── about.tsx
+    │   │   ├── contact.tsx
+    │   │   ├── experience.tsx
+    │   │   ├── hero.tsx
+    │   │   ├── projects.tsx
+    │   │   └── skills.tsx
+    │   └── ui/
+    │       └── (UI components)
+    ├── hooks/
+    │   ├── use-mobile.tsx
+    │   └── use-toast.ts
+    └── lib/
+        ├── data.ts
+        ├── placeholder-images.json
+        ├── placeholder-images.ts
+        └── utils.ts
 ```
 
 ---
