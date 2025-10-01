@@ -3,7 +3,7 @@
     {
       "id": "profile",
       "description": "Profile picture of Anil Kumar Sahu",
-      "imageUrl": "https://storage.googleapis.com/project-spark-3c35f.appspot.com/b5c731c0-0387-4340-97f3-1c61d51c72ea.jpg",
+      "imageUrl": "https://i.imgur.com/7T5op72.jpeg",
       "imageHint": "man portrait"
     },
     {
@@ -15,19 +15,19 @@
     {
       "id": "project-task-manager",
       "description": "Screenshot of Advanced Task Management System project",
-      "imageUrl": "https://images.unsplash.com/photo-1659018966825-43297e655ccf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxkYXNoYm9hcmQlMjBpbnRlcmZhY2V8ZW58MHx8fHwxNzU5MTg3MTg2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1634804658555-248d9e9a212f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxkYXNoYm9hcmQlMjBpbnRlcmZhY2V8ZW58MHx8fHwxNzU5MTg3MTg2fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "dashboard interface"
     },
     {
       "id": "project-todo",
       "description": "Screenshot of Smart To-Do List Application project",
-      "imageUrl": "https://images.unsplash.com/photo-1692158962093-ba00b43fec61?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx0by1kbyUyMGxpc3R8ZW58MHx8fHwxNzU5MjEwMjEzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1644329843283-640d00509d43?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx0by1kbyUyMGxpc3R8ZW58MHx8fHwxNzU5MjEwMjEzfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "to-do list"
     },
     {
       "id": "project-db-dashboard",
       "description": "Screenshot of SQL Database Dashboard project",
-      "imageUrl": "https://images.unsplash.com/photo-1584291527908-033f4d6542c8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxkYXRhJTIwY2hhcnRzfGVufDB8fHx8MTc1OTIxNTQxMXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1758873271740-f1fd6c6f1524?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxkYXRhJTIwY2hhcnRzfGVufDB8fHx8MTc1OTIxNTQxMXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "data charts"
     },
     {
@@ -39,7 +39,7 @@
     {
       "id": "project-weather",
       "description": "Screenshot of Weather Forecast App project",
-      "imageUrl": "https://images.unsplash.com/photo-1620737729381-a79833458394?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHx3ZWF0aGVyJTIwbWFwfGVufDB8fHx8MTc1OTIxNTQxMXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1740907259733-afc02b87ab20?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx3ZWF0aGVyJTIwbWFwfGVufDB8fHx8MTc1OTIxNTQxMXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "weather map"
     }
   ]
