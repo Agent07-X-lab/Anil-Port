@@ -5,65 +5,97 @@ import * as THREE from 'three';
 
 export function ParticleBackground() {
     const mountRef = useRef<HTMLDivElement>(null);
-    const mouse = useRef({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+    const mouse = useRef({ x: 0, y: 0 });
 
     useEffect(() => {
         if (!mountRef.current) return;
 
         const handleMouseMove = (event: MouseEvent) => {
-            mouse.current.x = event.clientX;
-            mouse.current.y = event.clientY;
+            mouse.current.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
         };
         window.addEventListener('mousemove', handleMouseMove);
 
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 100;
+        camera.position.z = 5;
 
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(window.devicePixelRatio);
         mountRef.current.appendChild(renderer.domElement);
 
-        const particlesCount = 5000;
-        const positions = new Float32Array(particlesCount * 3);
-        const colors = new Float32Array(particlesCount * 3);
-        const particleProps = new Float32Array(particlesCount * 2); // angle, radius
+        const parameters = {
+            count: 20000,
+            size: 0.015,
+            radius: 5,
+            branches: 5,
+            spin: 1,
+            randomness: 0.5,
+            randomnessPower: 3,
+            insideColor: '#3399ff',
+            outsideColor: '#29d99d',
+        };
 
-        const color = new THREE.Color();
+        let geometry: THREE.BufferGeometry | null = null;
+        let material: THREE.PointsMaterial | null = null;
+        let points: THREE.Points | null = null;
 
-        for (let i = 0; i < particlesCount; i++) {
-            const radius = Math.random() * 200 + 5;
-            const angle = Math.random() * Math.PI * 2;
+        const generateGalaxy = () => {
+             if (points !== null) {
+                geometry?.dispose();
+                material?.dispose();
+                scene.remove(points);
+            }
             
-            positions[i * 3] = radius * Math.cos(angle);
-            positions[i * 3 + 1] = radius * Math.sin(angle);
-            positions[i * 3 + 2] = (Math.random() - 0.5) * 10; // small z variation
+            geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(parameters.count * 3);
+            const colors = new Float32Array(parameters.count * 3);
 
-            particleProps[i * 2] = angle;
-            particleProps[i * 2 + 1] = radius;
-            
-            color.setHSL(Math.random() * 0.2 + 0.5, 0.8, 0.6);
-            colors[i * 3] = color.r;
-            colors[i * 3 + 1] = color.g;
-            colors[i * 3 + 2] = color.b;
+            const colorInside = new THREE.Color(parameters.insideColor);
+            const colorOutside = new THREE.Color(parameters.outsideColor);
+
+            for (let i = 0; i < parameters.count; i++) {
+                const i3 = i * 3;
+
+                // Position
+                const radius = Math.random() * parameters.radius;
+                const spinAngle = radius * parameters.spin;
+                const branchAngle = ((i % parameters.branches) / parameters.branches) * Math.PI * 2;
+
+                const randomX = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1) * parameters.randomness * radius;
+                const randomY = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1) * parameters.randomness * radius;
+                const randomZ = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1) * parameters.randomness * radius;
+
+                positions[i3] = Math.cos(branchAngle + spinAngle) * radius + randomX;
+                positions[i3 + 1] = Math.sin(branchAngle + spinAngle) * radius + randomY;
+                positions[i3 + 2] = randomZ;
+
+                // Color
+                const mixedColor = colorInside.clone();
+                mixedColor.lerp(colorOutside, radius / parameters.radius);
+
+                colors[i3] = mixedColor.r;
+                colors[i3 + 1] = mixedColor.g;
+                colors[i3 + 2] = mixedColor.b;
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+            material = new THREE.PointsMaterial({
+                size: parameters.size,
+                sizeAttenuation: true,
+                depthWrite: false,
+                blending: THREE.AdditiveBlending,
+                vertexColors: true,
+            });
+
+            points = new THREE.Points(geometry, material);
+            scene.add(points);
         }
 
-        const geometry = new THREE.BufferGeometry();
-        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-        geometry.setAttribute('particleProps', new THREE.BufferAttribute(particleProps, 2));
-        
-        const material = new THREE.PointsMaterial({ 
-            size: 0.5, 
-            vertexColors: true,
-            transparent: true,
-            opacity: 0.8,
-            blending: THREE.AdditiveBlending,
-        });
-        
-        const particles = new THREE.Points(geometry, material);
-        scene.add(particles);
+        generateGalaxy();
 
         const onResize = () => {
             camera.aspect = window.innerWidth / window.innerHeight;
@@ -76,58 +108,16 @@ export function ParticleBackground() {
 
         const animate = () => {
             requestAnimationFrame(animate);
-            const delta = clock.getDelta();
-            
-            const positionAttribute = particles.geometry.getAttribute('position');
-            const propsAttribute = particles.geometry.getAttribute('particleProps');
+            const elapsedTime = clock.getElapsedTime();
 
-            for (let i = 0; i < particlesCount; i++) {
-                let angle = propsAttribute.getX(i);
-                let radius = propsAttribute.getY(i);
-                
-                // speed is higher for particles closer to the center
-                const angularSpeed = 0.5 / (radius * 0.1 + 1); 
-                angle += angularSpeed * delta;
-
-                // pull particles to the center
-                radius -= 2 * delta;
-
-                // reset particles that reach the center
-                if (radius < 1) {
-                    radius = Math.random() * 150 + 50;
-                    angle = Math.random() * Math.PI * 2;
-                }
-                
-                let x = radius * Math.cos(angle);
-                let y = radius * Math.sin(angle);
-
-                // Mouse interaction
-                const mouseVector = new THREE.Vector2(
-                    (mouse.current.x / window.innerWidth) * 2 - 1,
-                    -(mouse.current.y / window.innerHeight) * 2 + 1
-                );
-                
-                const particleVector = new THREE.Vector2(x / 100, y / 100);
-                const distance = mouseVector.distanceTo(particleVector);
-
-                if (distance < 0.2) {
-                    const repelForce = (0.2 - distance) * 2;
-                    const repelAngle = Math.atan2(y, x) - Math.atan2(mouseVector.y * 100, mouseVector.x * 100);
-                    angle += Math.cos(repelAngle) * repelForce * 0.1;
-                    radius += Math.sin(repelAngle) * repelForce * 10;
-                }
-
-
-                positionAttribute.setX(i, radius * Math.cos(angle));
-                positionAttribute.setY(i, radius * Math.sin(angle));
-                
-                propsAttribute.setX(i, angle);
-                propsAttribute.setY(i, radius);
+            if (points) {
+                points.rotation.y = elapsedTime * 0.1;
             }
-            positionAttribute.needsUpdate = true;
-            propsAttribute.needsUpdate = true;
-            
-            particles.rotation.z += 0.0005;
+
+            // Animate camera to follow mouse
+            camera.position.x += (mouse.current.x * 0.5 - camera.position.x) * 0.05;
+            camera.position.y += (mouse.current.y * 0.5 - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
             
             renderer.render(scene, camera);
         };
@@ -139,6 +129,8 @@ export function ParticleBackground() {
             if (mountRef.current && renderer.domElement) {
                 mountRef.current.removeChild(renderer.domElement);
             }
+            geometry?.dispose();
+            material?.dispose();
             renderer.dispose();
         };
     }, []);
