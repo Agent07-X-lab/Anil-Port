@@ -124,8 +124,8 @@ export const experiences = [
     {
         category: 'Certifications',
         items: [
-            { title: 'React.js - Advanced', date: '2025', description: 'Completed an in-depth course on advanced React concepts and performance optimization.' },
-            { title: 'Node.js Development', date: '2025', description: 'Mastered backend development with Node.js, Express, and REST APIs.' },
+            { title: 'React.js - Advanced', date: '2023', description: 'Completed an in-depth course on advanced React concepts and performance optimization.' },
+            { title: 'Node.js Development', date: '2023', description: 'Mastered backend development with Node.js, Express, and REST APIs.' },
             { title: 'UI/UX Design Fundamentals', date: '2024', description: 'Gained foundational knowledge in user interface and user experience design.' },
             { title: 'SQL Database Management', date: '2024', description: 'Learned advanced SQL queries and database administration.' },
         ],
@@ -135,7 +135,7 @@ export const experiences = [
         items: [
             { title: 'Built 15+ Projects', date: 'Ongoing', description: 'Developed a diverse range of personal and academic projects.' },
             { title: 'Open Source Contributor', date: 'Ongoing', description: 'Actively contributing to various open-source projects on GitHub.' },
-            { title: 'Hackathon Participant', date: '2025', description: 'Competed in multiple hackathons, developing innovative solutions under pressure.' },
+            { title: 'Hackathon Participant', date: '2023', description: 'Competed in multiple hackathons, developing innovative solutions under pressure.' },
             { title: 'College Tech Society Member', date: '2024-Present', description: 'An active member of the college technology society, organizing and participating in events.' },
         ],
     },

@@ -47,7 +47,7 @@ export function About() {
                 <div className="relative">
                     <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-full blur-2xl opacity-50 animate-pulse"></div>
                         <Image 
-                            src="https://storage.googleapis.com/project-spark-3c35f.appspot.com/b5c731c0-0387-4340-97f3-1c61d51c72ea.jpg"
+                            src={profileImage?.imageUrl || "https://storage.googleapis.com/project-spark-3c35f.appspot.com/b5c731c0-0387-4340-97f3-1c61d51c72ea.jpg"}
                             alt="Anil Kumar Sahu"
                             width={320}
                             height={320}
