@@ -29,7 +29,7 @@ export function ParticleBackground() {
         mountRef.current.appendChild(renderer.domElement);
 
         // Small white stars
-        const starCount = 1000;
+        const starCount = 1500;
         const positions = new Float32Array(starCount * 3);
         const starVelocities = new Float32Array(starCount);
         const starGeometry = new THREE.BufferGeometry();
@@ -45,7 +45,7 @@ export function ParticleBackground() {
         
         const starMaterial = new THREE.PointsMaterial({
             color: '#ffffff',
-            size: 0.01,
+            size: 0.015,
             sizeAttenuation: true,
             depthWrite: false,
             blending: THREE.AdditiveBlending,
@@ -54,7 +54,7 @@ export function ParticleBackground() {
         scene.add(stars);
 
         // Big colorful stars
-        const bigStarCount = 20;
+        const bigStarCount = 30;
         const bigPositions = new Float32Array(bigStarCount * 3);
         const bigColors = new Float32Array(bigStarCount * 3);
         const bigStarVelocities = new Float32Array(bigStarCount);
@@ -77,7 +77,7 @@ export function ParticleBackground() {
         bigStarGeometry.setAttribute('color', new THREE.BufferAttribute(bigColors, 3));
 
         const bigStarMaterial = new THREE.PointsMaterial({
-            size: 0.08,
+            size: 0.12,
             vertexColors: true,
             sizeAttenuation: true,
             depthWrite: false,

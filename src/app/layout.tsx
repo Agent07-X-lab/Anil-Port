@@ -7,16 +7,16 @@ import { Footer } from '@/components/footer';
 import { MouseSpotlight } from '@/components/ui/mouse-spotlight';
 
 export const metadata: Metadata = {
-  title: "Modern Portfolio",
+  title: "Morden Portfolio",
   description: "Anil Kumar Sahu - Full-Stack Developer & UI/UX Designer. Crafting Digital Experiences Through Code & Design.",
   openGraph: {
-    title: "Modern Portfolio",
+    title: "Morden Portfolio",
     description: "A stunning, modern portfolio showcasing the skills and projects of Anil Kumar Sahu, a Full-Stack Developer & UI/UX Designer.",
-    url: 'https://your-domain.com', // To be updated with actual domain
-    siteName: 'Modern Portfolio',
+    url: 'https://anil-port.vercel.app/', // To be updated with actual domain
+    siteName: 'Morden Portfolio',
     images: [
       {
-        url: 'https://your-domain.com/og-image.png', // To be updated
+        url: 'https://anil-port.vercel.app/og-image.png', // To be updated
         width: 1200,
         height: 630,
       },
@@ -26,10 +26,10 @@ export const metadata: Metadata = {
   },
    twitter: {
     card: 'summary_large_image',
-    title: "Modern Portfolio",
+    title: "Morden Portfolio",
     description: "A stunning, modern portfolio showcasing the skills and projects of Anil Kumar Sahu, a Full-Stack Developer & UI/UX Designer.",
     // creator: '@yourtwitterhandle', // To be updated
-    images: ['https://your-domain.com/og-image.png'], // To be updated
+    images: ['https://anil-port.vercel.app/og-image.png'], // To be updated
   },
 };
 

@@ -45,7 +45,6 @@ export const skills = {
         { name: 'MySQL', level: 70, icon: '🐬', projectCount: 1 },
         { name: 'SQL', level: 85, icon: '💾', projectCount: 2 },
         { name: 'PostgreSQL', level: 65, icon: '🐘', projectCount: 1 },
-        { name: 'Firebase', level: 75, icon: '🔥', projectCount: 1 },
     ],
     'Design & Tools': [
         { name: 'Figma', level: 95, icon: '🎨', projectCount: 5 },

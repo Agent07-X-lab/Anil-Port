@@ -34,7 +34,7 @@ export function About() {
   return (
     <Section id="about" title="About Me" className="relative overflow-hidden">
         <div className="absolute inset-0 -z-10">
-          <Ballpit />
+          <Ballpit count={50} />
         </div>
         <motion.div 
             className="relative z-10 grid md:grid-cols-2 gap-12"
@@ -46,7 +46,7 @@ export function About() {
             <motion.div className="flex items-center justify-center" variants={itemVariants}>
                 <div className="relative">
                     <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-full blur-2xl opacity-50 animate-pulse"></div>
-                        <Image 
+                        <Image
                             src={profileImage?.imageUrl || "https://storage.googleapis.com/project-spark-3c35f.appspot.com/b5c731c0-0387-4340-97f3-1c61d51c72ea.jpg"}
                             alt="Anil Kumar Sahu"
                             width={320}
@@ -55,7 +55,7 @@ export function About() {
                         />
                 </div>
             </motion.div>
-            
+
             <motion.div className="space-y-6" variants={itemVariants}>
                 <p className="text-xl text-muted-foreground leading-relaxed">
                     Hey there! 👋 I'm <span className="text-primary font-semibold">Anil Kumar Sahu</span>, 
