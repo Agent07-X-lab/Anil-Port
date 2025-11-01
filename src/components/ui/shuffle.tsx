@@ -2,7 +2,10 @@
 
 import React, { useRef, useEffect, useState, memo } from 'react';
 import { gsap } from 'gsap';
+import { TextPlugin } from 'gsap/TextPlugin';
 import { useInView } from 'framer-motion';
+
+gsap.registerPlugin(TextPlugin);
 
 const SYMBOLS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+-=[]{}|;:,.<>?/'.split('');
 
@@ -79,12 +82,9 @@ const Shuffle: React.FC<ShuffleProps> = ({
       for (let i = 0; i < shuffleTimes; i++) {
         tl.to(
           char,
+          duration / (shuffleTimes * chars.length),
           {
-            duration: duration / (shuffleTimes * chars.length),
-            text: {
-              value: () =>
-                SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)],
-            },
+            text: SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)],
             ease: 'none',
           },
           getStartTime(index, chars.length)

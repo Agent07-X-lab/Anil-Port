@@ -38,12 +38,46 @@ export function Header() {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  const scrollToTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+    if (mobileMenuOpen) {
+      setMobileMenuOpen(false);
+    }
+  };
+
+  const scrollToSection = (sectionId: string, e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerOffset = 100;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+    }
+    if (mobileMenuOpen) {
+      setMobileMenuOpen(false);
+    }
+  };
+
   const NavItems = ({ isMobile = false }) => (
     navLinks.map((link) => (
       <Link
         key={link.id}
         href={`#${link.id}`}
-        onClick={() => isMobile && setMobileMenuOpen(false)}
+        onClick={(e) => {
+          scrollToSection(link.id, e);
+          if (isMobile) {
+            setMobileMenuOpen(false);
+          }
+        }}
         className={cn(
           "relative px-3 py-2 text-sm font-medium transition-colors hover:text-primary",
           activeSection === link.id ? 'text-primary' : 'text-muted-foreground',
@@ -74,7 +108,11 @@ export function Header() {
             scrolled ? 'bg-background/80 backdrop-blur-lg border' : 'bg-transparent border-none'
         )}>
           <div className="flex h-16 items-center justify-between px-6">
-            <Link href="#home" className="text-xl font-headline font-bold gradient-text">
+            <Link 
+              href="#home" 
+              onClick={scrollToTop}
+              className="text-xl font-headline font-bold gradient-text cursor-pointer"
+            >
               Portfolio
             </Link>
             <nav className="hidden md:flex items-center space-x-2">
@@ -99,7 +137,10 @@ export function Header() {
             className="fixed inset-0 z-50 bg-background/95 backdrop-blur-xl md:hidden"
           >
             <div className="flex h-16 items-center justify-between px-6">
-                <Link href="#home" className="text-xl font-headline font-bold gradient-text" onClick={toggleMobileMenu}>
+                <Link href="#home" className="text-xl font-headline font-bold gradient-text" onClick={(e) => {
+                  scrollToTop(e);
+                  toggleMobileMenu();
+                }}>
                     Portfolio
                 </Link>
                 <Button variant="ghost" size="icon" onClick={toggleMobileMenu}>

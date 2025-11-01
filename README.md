@@ -195,7 +195,7 @@ Update your details in `App.jsx`:
 // Hero Section
 name: "Anil Kumar Sahu"
 title: "Full-Stack Developer"
-college: "PME College"
+college: "Parala Maharaja Engineering College"
 
 // Contact Section
 email: "your.email@example.com"

@@ -30,7 +30,7 @@ export function Hero() {
           className="text-6xl md:text-8xl font-bold font-headline mb-4"
         >
          <Shuffle
-            text="Anil Kumar Sahu"
+            text="Anil"
             shuffleDirection="left"
             duration={1}
             animationMode="onebyone"

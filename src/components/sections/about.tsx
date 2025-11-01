@@ -59,7 +59,7 @@ export function About() {
             <motion.div className="space-y-6" variants={itemVariants}>
                 <p className="text-xl text-muted-foreground leading-relaxed">
                     Hey there! 👋 I'm <span className="text-primary font-semibold">Anil Kumar Sahu</span>, 
-                    a passionate B.Tech student at PME College who loves turning ideas into reality through code.
+                    a passionate B.Tech student at Parala Maharaja Engineering College who loves turning ideas into reality through code.
                 </p>
                 <p className="text-lg text-muted-foreground/80">
                     I specialize in building modern web applications with React and Node.js, 

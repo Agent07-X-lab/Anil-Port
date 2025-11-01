@@ -117,7 +117,7 @@ export const experiences = [
     {
         category: 'Education',
         items: [
-            { title: 'B.Tech at PME College', date: '2024-2028', description: 'Pursuing a degree in Computer Science, focusing on software development and design principles.' },
+            { title: 'B.Tech at Parala Maharaja Engineering College', date: '2024-2028', description: 'Pursuing a degree in Computer Science, focusing on software development and design principles.' },
         ],
     },
     {
