@@ -25,11 +25,14 @@ export function ParticleBackground() {
         renderer.setPixelRatio(window.devicePixelRatio);
         mountRef.current.appendChild(renderer.domElement);
 
-        // Small white stars - increased for more visual impact
-        const starCount = 800;
+        // Small colorful stars - increased for more visual impact
+        const starCount = 1200;
         const positions = new Float32Array(starCount * 3);
         const starVelocities = new Float32Array(starCount);
+        const starColors = new Float32Array(starCount * 3);
         const starGeometry = new THREE.BufferGeometry();
+
+        const smallStarColors = [new THREE.Color('#ff8a5b'), new THREE.Color('#86a8e7'), new THREE.Color('#91EAE4'), new THREE.Color('#7f7fd5')];
 
         for (let i = 0; i < starCount; i++) {
             const i3 = i * 3;
@@ -37,17 +40,24 @@ export function ParticleBackground() {
             positions[i3 + 1] = (Math.random() - 0.5) * 10;
             positions[i3 + 2] = (Math.random() - 0.5) * 10;
             starVelocities[i] = 0.005 + Math.random() * 0.015;
+
+            const color = smallStarColors[Math.floor(Math.random() * smallStarColors.length)];
+            starColors[i3] = color.r;
+            starColors[i3 + 1] = color.g;
+            starColors[i3 + 2] = color.b;
         }
         starGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        starGeometry.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
         
-        // Custom shader for glowing white stars
+        // Custom shader for glowing colorful stars
         const starVertexShader = `
             attribute float size;
+            attribute vec3 color;
             varying vec3 vColor;
             varying float vOpacity;
 
             void main() {
-                vColor = vec3(1.0, 1.0, 1.0);
+                vColor = color;
                 vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
                 gl_PointSize = size * (300.0 / -mvPosition.z) * 3.0;
                 vOpacity = 1.0;
@@ -91,7 +101,7 @@ export function ParticleBackground() {
             blending: THREE.AdditiveBlending,
             depthWrite: false,
             transparent: true,
-            vertexColors: false
+            vertexColors: true
         });
         
         // Add size attribute for varying star sizes
@@ -105,7 +115,7 @@ export function ParticleBackground() {
         scene.add(stars);
 
         // Big colorful stars
-        const bigStarCount = 25;
+        const bigStarCount = 50;
         const bigPositions = new Float32Array(bigStarCount * 3);
         const bigColors = new Float32Array(bigStarCount * 3);
         const bigStarVelocities = new Float32Array(bigStarCount);
@@ -242,6 +252,43 @@ export function ParticleBackground() {
             camera.lookAt(scene.position);
             
             renderer.render(scene, camera);
+
+            // Debug logging for shader compilation
+            const gl = renderer.getContext();
+            const starProgram = (starMaterial as any).program;
+            if (starProgram) {
+                if (!gl.getProgramParameter(starProgram, gl.LINK_STATUS)) {
+                    console.log('Star program link failed:', gl.getProgramInfoLog(starProgram));
+                }
+                const shaders = gl.getAttachedShaders(starProgram);
+                if (shaders && shaders.length >= 2) {
+                    const vertexShader = shaders[0];
+                    const fragmentShader = shaders[1];
+                    if (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)) {
+                        console.log('Star vertex shader compile failed:', gl.getShaderInfoLog(vertexShader));
+                    }
+                    if (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)) {
+                        console.log('Star fragment shader compile failed:', gl.getShaderInfoLog(fragmentShader));
+                    }
+                }
+            }
+            const bigStarProgram = (bigStarMaterial as any).program;
+            if (bigStarProgram) {
+                if (!gl.getProgramParameter(bigStarProgram, gl.LINK_STATUS)) {
+                    console.log('Big star program link failed:', gl.getProgramInfoLog(bigStarProgram));
+                }
+                const shaders = gl.getAttachedShaders(bigStarProgram);
+                if (shaders && shaders.length >= 2) {
+                    const vertexShader = shaders[0];
+                    const fragmentShader = shaders[1];
+                    if (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)) {
+                        console.log('Big star vertex shader compile failed:', gl.getShaderInfoLog(vertexShader));
+                    }
+                    if (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)) {
+                        console.log('Big star fragment shader compile failed:', gl.getShaderInfoLog(fragmentShader));
+                    }
+                }
+            }
         };
         animate();
 
