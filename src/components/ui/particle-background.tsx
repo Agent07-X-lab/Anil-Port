@@ -8,7 +8,7 @@ export function ParticleBackground() {
     const mouse = useRef({ x: 0, y: 0 });
 
     useEffect(() => {
-        if (!mountRef.current) return;
+        if (!mountRef.current || typeof window === 'undefined') return;
 
         const handleMouseMove = (event: MouseEvent) => {
             mouse.current.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -20,10 +20,23 @@ export function ParticleBackground() {
         const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
         camera.position.z = 1;
 
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(window.devicePixelRatio);
-        mountRef.current.appendChild(renderer.domElement);
+        let renderer: THREE.WebGLRenderer | null = null;
+        try {
+            renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2)); // Limit pixel ratio for performance
+            if (mountRef.current) {
+                mountRef.current.appendChild(renderer.domElement);
+            }
+        } catch (error) {
+            // WebGL not supported or initialization failed
+            if (typeof process !== 'undefined' && process.env?.NODE_ENV === 'development') {
+                console.warn('WebGL initialization failed:', error);
+            }
+            return;
+        }
+        
+        if (!renderer) return;
 
         // Small colorful stars - increased for more visual impact
         const starCount = 1200;
@@ -204,11 +217,14 @@ export function ParticleBackground() {
 
 
         const onResize = () => {
+            if (typeof window === 'undefined') return;
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         };
-        window.addEventListener('resize', onResize);
+        if (typeof window !== 'undefined') {
+            window.addEventListener('resize', onResize);
+        }
 
         const clock = new THREE.Clock();
 
@@ -254,37 +270,47 @@ export function ParticleBackground() {
             renderer.render(scene, camera);
 
             // Shader error checking (only in development)
-            if (process.env.NODE_ENV === 'development') {
-                const gl = renderer.getContext();
-                const starProgram = (starMaterial as any).program;
-                if (starProgram && !gl.getProgramParameter(starProgram, gl.LINK_STATUS)) {
-                    const infoLog = gl.getProgramInfoLog(starProgram);
-                    if (infoLog) {
-                        console.error('Star program error:', infoLog);
+            if (typeof process !== 'undefined' && process.env?.NODE_ENV === 'development') {
+                try {
+                    const gl = renderer.getContext();
+                    const starProgram = (starMaterial as any).program;
+                    if (starProgram && !gl.getProgramParameter(starProgram, gl.LINK_STATUS)) {
+                        const infoLog = gl.getProgramInfoLog(starProgram);
+                        if (infoLog) {
+                            console.error('Star program error:', infoLog);
+                        }
                     }
-                }
-                const bigStarProgram = (bigStarMaterial as any).program;
-                if (bigStarProgram && !gl.getProgramParameter(bigStarProgram, gl.LINK_STATUS)) {
-                    const infoLog = gl.getProgramInfoLog(bigStarProgram);
-                    if (infoLog) {
-                        console.error('Big star program error:', infoLog);
+                    const bigStarProgram = (bigStarMaterial as any).program;
+                    if (bigStarProgram && !gl.getProgramParameter(bigStarProgram, gl.LINK_STATUS)) {
+                        const infoLog = gl.getProgramInfoLog(bigStarProgram);
+                        if (infoLog) {
+                            console.error('Big star program error:', infoLog);
+                        }
                     }
+                } catch (e) {
+                    // Silently fail in production
                 }
             }
         };
         animate();
 
         return () => {
-            window.removeEventListener('resize', onResize);
-            window.removeEventListener('mousemove', handleMouseMove);
-            if (mountRef.current && renderer.domElement) {
-                mountRef.current.removeChild(renderer.domElement);
+            if (typeof window !== 'undefined') {
+                window.removeEventListener('resize', onResize);
+                window.removeEventListener('mousemove', handleMouseMove);
+            }
+            try {
+                if (renderer && mountRef.current && renderer.domElement && mountRef.current.contains(renderer.domElement)) {
+                    mountRef.current.removeChild(renderer.domElement);
+                }
+            } catch (e) {
+                // Silently handle cleanup errors
             }
             starGeometry?.dispose();
             starMaterial?.dispose();
             bigStarGeometry?.dispose();
             bigStarMaterial?.dispose();
-            renderer.dispose();
+            renderer?.dispose();
         };
     }, []);
 

@@ -24,6 +24,8 @@ const Ballpit: React.FC<{
   const mouse = useRef({ x: -1000, y: -1000 });
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -58,7 +60,7 @@ const Ballpit: React.FC<{
         mouse.current.y = e.clientY - rect.top;
     };
     
-    if (followCursor) {
+    if (followCursor && typeof window !== 'undefined') {
         window.addEventListener('mousemove', handleMouseMove);
     }
     
@@ -115,13 +117,17 @@ const Ballpit: React.FC<{
 
     animate();
 
-    window.addEventListener('resize', resizeCanvas);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', resizeCanvas);
+    }
 
     return () => {
       cancelAnimationFrame(animationFrameId);
-      window.removeEventListener('resize', resizeCanvas);
-      if (followCursor) {
-        window.removeEventListener('mousemove', handleMouseMove);
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', resizeCanvas);
+        if (followCursor) {
+          window.removeEventListener('mousemove', handleMouseMove);
+        }
       }
     };
   }, [count, gravity, friction, wallBounce, followCursor, minRadius, maxRadius]);

@@ -14,7 +14,11 @@ export function Header() {
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const handleScroll = () => {
+      if (typeof window === 'undefined' || typeof document === 'undefined') return;
+      
       setScrolled(window.scrollY > 50);
 
       const sections = navLinks.map(link => document.getElementById(link.id));
@@ -31,7 +35,11 @@ export function Header() {
     window.addEventListener('scroll', handleScroll);
     handleScroll();
     
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('scroll', handleScroll);
+      }
+    };
   }, []);
 
   const toggleMobileMenu = () => {
@@ -40,6 +48,8 @@ export function Header() {
 
   const scrollToTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+    if (typeof window === 'undefined') return;
+    
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
@@ -51,6 +61,8 @@ export function Header() {
 
   const scrollToSection = (sectionId: string, e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+    if (typeof window === 'undefined' || typeof document === 'undefined') return;
+    
     const element = document.getElementById(sectionId);
     if (element) {
       const headerOffset = 100;
