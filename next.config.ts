@@ -9,7 +9,6 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   // Optimize performance
-  swcMinify: true,
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },

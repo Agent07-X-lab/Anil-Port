@@ -253,39 +253,21 @@ export function ParticleBackground() {
             
             renderer.render(scene, camera);
 
-            // Debug logging for shader compilation
-            const gl = renderer.getContext();
-            const starProgram = (starMaterial as any).program;
-            if (starProgram) {
-                if (!gl.getProgramParameter(starProgram, gl.LINK_STATUS)) {
-                    console.log('Star program link failed:', gl.getProgramInfoLog(starProgram));
-                }
-                const shaders = gl.getAttachedShaders(starProgram);
-                if (shaders && shaders.length >= 2) {
-                    const vertexShader = shaders[0];
-                    const fragmentShader = shaders[1];
-                    if (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)) {
-                        console.log('Star vertex shader compile failed:', gl.getShaderInfoLog(vertexShader));
-                    }
-                    if (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)) {
-                        console.log('Star fragment shader compile failed:', gl.getShaderInfoLog(fragmentShader));
+            // Shader error checking (only in development)
+            if (process.env.NODE_ENV === 'development') {
+                const gl = renderer.getContext();
+                const starProgram = (starMaterial as any).program;
+                if (starProgram && !gl.getProgramParameter(starProgram, gl.LINK_STATUS)) {
+                    const infoLog = gl.getProgramInfoLog(starProgram);
+                    if (infoLog) {
+                        console.error('Star program error:', infoLog);
                     }
                 }
-            }
-            const bigStarProgram = (bigStarMaterial as any).program;
-            if (bigStarProgram) {
-                if (!gl.getProgramParameter(bigStarProgram, gl.LINK_STATUS)) {
-                    console.log('Big star program link failed:', gl.getProgramInfoLog(bigStarProgram));
-                }
-                const shaders = gl.getAttachedShaders(bigStarProgram);
-                if (shaders && shaders.length >= 2) {
-                    const vertexShader = shaders[0];
-                    const fragmentShader = shaders[1];
-                    if (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)) {
-                        console.log('Big star vertex shader compile failed:', gl.getShaderInfoLog(vertexShader));
-                    }
-                    if (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)) {
-                        console.log('Big star fragment shader compile failed:', gl.getShaderInfoLog(fragmentShader));
+                const bigStarProgram = (bigStarMaterial as any).program;
+                if (bigStarProgram && !gl.getProgramParameter(bigStarProgram, gl.LINK_STATUS)) {
+                    const infoLog = gl.getProgramInfoLog(bigStarProgram);
+                    if (infoLog) {
+                        console.error('Big star program error:', infoLog);
                     }
                 }
             }

@@ -38,14 +38,17 @@ export async function submitContactForm(
 
   try {
     // Here you would typically send an email or save to a database
-    console.log('Form data submitted:', parsed.data);
+    // In production, you would integrate with an email service or database here
     
     // Simulate network delay
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     return { message: "Your message has been sent successfully!", success: true };
   } catch (error) {
-    console.error('Error submitting form:', error);
+    // Log error only in development
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error submitting form:', error);
+    }
     return { message: "An unexpected error occurred. Please try again.", success: false };
   }
 }
