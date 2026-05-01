@@ -53,9 +53,13 @@ export const HeroSection = () => {
     }
   }, [displayedCode, currentCodeLine]);
 
-  const handleViewResume = () => {
-    // Open resume in new tab
-    window.open('/anil kumar sahu.pdf', '_blank', 'noopener,noreferrer');
+  const handleDownloadResume = () => {
+    const link = document.createElement('a');
+    link.href = '/projects/anil_kumar_sahu.pdf';
+    link.download = 'anil_kumar_sahu.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -139,7 +143,7 @@ export const HeroSection = () => {
               </motion.a>
               
               <motion.button 
-                onClick={handleViewResume}
+                onClick={handleDownloadResume}
                 className="group relative overflow-hidden px-6 py-4 rounded-xl font-semibold border border-border text-muted-foreground hover:border-primary/30 transition-all duration-300 bg-background/60 backdrop-blur-sm text-sm flex items-center justify-center gap-2" 
                 whileHover={{ scale: 1.05, y: -2 }} 
                 whileTap={{ scale: 0.95 }}

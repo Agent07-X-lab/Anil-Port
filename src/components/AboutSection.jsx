@@ -49,8 +49,8 @@ export const AboutSection = () => {
   // Programmatic download function
   const handleDownload = () => {
     const link = document.createElement('a');
-    link.href = '/anil kumar sahu.pdf'; // Must be in public folder
-    link.download = 'anil kumar sahu.pdf';
+    link.href = '/projects/anil_kumar_sahu.pdf'; // Must be in public folder
+    link.download = 'anil_kumar_sahu.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
