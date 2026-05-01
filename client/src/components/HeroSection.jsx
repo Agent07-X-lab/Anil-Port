@@ -55,7 +55,7 @@ export const HeroSection = () => {
 
   const handleViewResume = () => {
     // Open resume in new tab
-    window.open('/Anil-resume.pdf', '_blank', 'noopener,noreferrer');
+    window.open('/anil kumar sahu.pdf', '_blank', 'noopener,noreferrer');
   };
 
   return (
